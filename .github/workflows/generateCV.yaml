@@ -1,0 +1,17 @@
+name: Generate CV
+on:
+  push:
+jobs:
+  generate:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+
+      - name: Run Generate CV
+        run: rendercv render "Rohan_Panchal_CV.yaml"
