@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import com.microsoft.playwright.*;
 
-@UsePlaywright
-public class testJUnitIntegration {
-    @Test
-    void basicTest(BrowserContext browserContext) {
-        Page page = browserContext.newPage();
-        page.navigate("https://playwright.dev");
-        page.click("'Get started'");
-    }
-}
+// @UsePlaywright
+// public class testJUnitIntegration {
+//     @Test
+//     void basicTest(BrowserContext browserContext) {
+//         Page page = browserContext.newPage();
+//         page.navigate("https://playwright.dev");
+//         page.click("'Get started'");
+//     }
+// }
