@@ -31,9 +31,9 @@ public class testExample {
         context = browser.newContext();
         // Start tracing before creating / navigating a page
         context.tracing().start(new Tracing.StartOptions()
-        .setScreenshots(true)
-        .setSnapshots(true)
-        .setSources(true));
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(true));
 
         page = context.newPage();
     }
@@ -42,7 +42,7 @@ public class testExample {
     void closeContext() {
         // Stop tracing and export it into a zip archive.
         context.tracing().stop(new Tracing.StopOptions()
-        .setPath(Paths.get("trace.zip")));
+                .setPath(Paths.get("trace.zip")));
         context.close();
     }
 

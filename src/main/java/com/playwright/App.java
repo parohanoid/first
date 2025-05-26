@@ -1,6 +1,8 @@
 package com.playwright;
 
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import com.microsoft.playwright.*;
@@ -27,26 +29,26 @@ public final class App {
                     .setHeadless(false).setSlowMo(50));
 
             Page page = browser.newPage();
-            page.navigate("https://playwright.dev");
-            page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("playwright.png", args)));
+            page.navigate("http://www.tizag.com/htmlT/htmlcheckboxes.php");
 
-            // Assert Title
-            assertThat(page).hasTitle(Pattern.compile("Playwright"));
+            page.locator("(//input[@name='sports'])[1]").waitFor();
 
-            // Create Locator
-            Locator getStarted = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("GET STARTED"));
+            List<Locator> allCheckboxes = page.locator("//input[@name='sports']").all();
 
-            // Assert Attribute
-            assertThat(getStarted).hasAttribute("href", "/docs/intro");
+            Random r = new Random();
 
-            // Click Get Started
-            getStarted.click();
+            int firstRandom = r.nextInt(allCheckboxes.size());
+            Locator firstRandomLocator = allCheckboxes.get(r.nextInt(allCheckboxes.size()));
+            firstRandomLocator.check();
+            allCheckboxes.remove(firstRandom);
 
-            // Assert Heading
-            assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Installation")))
-                    .isVisible();
+            int secondRandom = r.nextInt(allCheckboxes.size());
+            Locator secondRandomLocator = allCheckboxes.get(r.nextInt(allCheckboxes.size()));
+            secondRandomLocator.check();
+            allCheckboxes.remove(secondRandom);
 
-            page.close();
+            page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshot.png")));
+
         }
     }
 }
